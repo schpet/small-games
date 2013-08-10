@@ -1,0 +1,56 @@
+$orange: rgb(255, 166, 0);
+body {
+  background: #FF0;
+  text-align: center;
+  font-family: 'schmoonflowermedium';
+  font-size: 24px;
+  -webkit-font-smoothing: antialised;
+}
+
+a {
+  text-decoration: none;
+  color: $orange;
+  &:hover {
+    color: lighten($orange, 10%);
+  }
+
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.title, .linkz {
+  text-align: center;
+}
+.linkz {
+  margin-top: 40px;
+}
+
+.game-links {
+  text-align: center;
+  .game {
+    $p: 35px;
+    background: #fff;
+    width: 100px;
+    height: 100px - $p;
+    padding-top: $p;
+    display: inline-block;
+  }
+}
+.game-frame {
+  background: #fff;
+  padding: 20px;
+  display: inline-block;
+  border-radius: 8px;
+}
+.game-container {
+  display: inline-block;
+  position: relative;
+  border: 1px solid #DBDBDB;
+  overflow: hidden;
+  .game-title {
+    font-size: 26px;
+  }
+}
