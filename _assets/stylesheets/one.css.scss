@@ -12,7 +12,7 @@ $frame-offset: 1;
   position: absolute;
   bottom: 155px;
   left: 70px;
-  background: url('/images/skeleton-sprite.png');
+  background: url('../images/skeleton-sprite.png');
   width: 60px;
   height: 60px;
   /*&.walking {*/
@@ -35,7 +35,7 @@ $image-width: 1027px / 2;
 }
 
 .background {
-  background-image: url('/images/background.jpg');
+  background-image: url('../images/background.jpg');
   width: $image-width;
   height: 180px;
   position: absolute;
