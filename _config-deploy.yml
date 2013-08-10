@@ -1,0 +1,8 @@
+name: 4 Small Games
+markdown: redcarpet
+permalink: pretty
+
+baseurl: http://peterschilling.org/small-games/
+
+assets:
+  baseurl: http://peterschilling.org/small-games/assets/
