@@ -9,7 +9,7 @@
 
   RIGHT = 39;
 
-  IMPATIENT = true;
+  IMPATIENT = false;
 
   AnimatableThing = (function(_super) {
     __extends(AnimatableThing, _super);
