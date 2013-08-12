@@ -1,8 +1,5 @@
 "use strict"
 
-do ->
-  window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
-
 LEFT = 37
 RIGHT = 39
 IMPATIENT = false
@@ -20,6 +17,21 @@ class AnimatableThing extends EventEmitter
 
     @stepActions = []
     @stepActionsFullFps = []
+
+  applyTransform: (transform) ->
+    options = [
+      'transform',
+      'webkitTransform',
+      'MozTransform',
+      'msTransform',
+      'OTransform'
+    ]
+
+    for option in options
+      @el.style[option] = transform if @el.style[option]?
+
+    return
+
 
   step: =>
     "stepping"
@@ -122,7 +134,8 @@ class Skeleton extends AnimatableThing
     translateX = @animationFallingPositions[@fallingPosition]['translateX'] + @adjustedHorizontalPosition()
     translateY = @animationFallingPositions[@fallingPosition]['translateY']
 
-    @el.style.webkitTransform = "translate(#{translateX}px, #{translateY}px)"
+    #@el.style.webkitTransform = "translate(#{translateX}px, #{translateY}px)"
+    @applyTransform "translate(#{translateX}px, #{translateY}px)"
 
     if ++@fallingPosition >= @animationFallingPositions.length
       @removeStepAction(@stepFallingAnimation)
@@ -139,11 +152,13 @@ class Skeleton extends AnimatableThing
 
       when 'right'
         @horizontalPosition++
-        @el.style.webkitTransform = "translateX(#{@adjustedHorizontalPosition()}px)"
+        #@el.style.webkitTransform = "translateX(#{@adjustedHorizontalPosition()}px)"
+        @applyTransform "translateX(#{@adjustedHorizontalPosition()}px)"
 
       when 'left'
         @horizontalPosition--
-        @el.style.webkitTransform = "translateX(#{@adjustedHorizontalPosition()}px) scaleX(-1)"
+        #@el.style.webkitTransform = "translateX(#{@adjustedHorizontalPosition()}px) scaleX(-1)"
+        @applyTransform "translateX(#{@adjustedHorizontalPosition()}px) scaleX(-1)"
 
     if @adjustedHorizontalPosition() >= magic
       @emitEvent 'ihavefoundmyplacethankyou'
@@ -168,7 +183,9 @@ class Skeleton extends AnimatableThing
 
   stopMoving: =>
     @removeStepAction(@stepMoveThisFella, true)
-    @el.style.webkitTransform = ""
+    #@el.style.webkitTransform = ""
+    @applyTransform ''
+
 
 class Background extends AnimatableThing
   constructor: ->
@@ -230,6 +247,10 @@ class GameOne extends EventEmitter
     @el = document.getElementById options.gameCanvasId
 
     @fps = options.fps
+    @unknown =
+      el: document.getElementById options.unknownId
+      visible: false
+
     @skeleton = new Skeleton({ elementId: options.skeletonId, gameFps: @fps, fps: 10 })
     @background = new Background({ elementId: options.backgroundId, gameFps: @fps, fps: 60 })
     @state = 'stopped'
@@ -282,8 +303,11 @@ class GameOne extends EventEmitter
       switch e.keyCode
         when LEFT then @setState('left')
         when RIGHT then @setState('right')
+        else
+          @showUnknown() if [ 17, 18, 91 ].indexOf(e.keyCode) == -1
 
     document.onkeyup = (e)=>
+      @hideUnknown()
       switch e.keyCode
         when LEFT then @setState('stopped')
         when RIGHT then @setState('stopped')
@@ -292,10 +316,22 @@ class GameOne extends EventEmitter
     @state = state
     @emitEvent 'state', [ state ]
 
+  showUnknown: =>
+    unless @unknown.visible
+      @unknown.el.classList.add 'visible'
+      @unknown.visible = true
+
+
+  hideUnknown: =>
+    if @unknown.visible
+      @unknown.el.classList.remove 'visible'
+      @unknown.visible = false
+
 window.onload = ->
   new GameOne(
     gameCanvasId: 'game'
     skeletonId: 'skeleton'
+    unknownId: 'unknown'
     backgroundId: 'background'
     fps: 60
   )

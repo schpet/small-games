@@ -1,12 +1,13 @@
+@mixin prefix($k, $v) {
+  -webkit-#{$k}: $v;
+     -moz-#{$k}: $v;
+      -ms-#{$k}: $v;
+       -o-#{$k}: $v;
+}
 
 $frame-count: 5;
 $frame-width: 60px;
 $frame-offset: 1;
-@-webkit-keyframes animate-skeleton {
-    0% { background-position: -$frame-offset * $frame-width 0; }
-    100% { background-position: -($frame-width * $frame-count + $frame-offset * $frame-width) 0; }
-}
-
 
 .skeleton {
   position: absolute;
@@ -15,24 +16,13 @@ $frame-offset: 1;
   background: url('../images/skeleton-sprite.png');
   width: 60px;
   height: 60px;
-  /*&.walking {*/
-    /*-webkit-animation: animate-skeleton 500ms steps($frame-count) infinite;*/
-  /*}*/
   &.look-left{
-    -webkit-transform: scaleX(-1);
+    @include prefix(transform, scaleX(-1));
   }
 }
 
 
 $image-width: 1027px / 2;
-@-webkit-keyframes animate-background {
-    0% { background-position: 0 0; }
-    100% { background-position: -$image-width 0; }
-}
-@-webkit-keyframes animate-background-backwards {
-    0% { background-position: -$image-width 0; }
-    100% { background-position: 0 0; }
-}
 
 .background {
   background-image: url('../images/background.jpg');
@@ -40,20 +30,23 @@ $image-width: 1027px / 2;
   height: 180px;
   position: absolute;
   bottom: 0;
-  &.moving {
-    -webkit-animation: animate-background 12s linear infinite;
-  }
-  &.moving-backwards {
-    -webkit-animation: animate-background 12s linear infinite;
-    -webkit-animation-direction: reverse
-  }
 }
+
 .final-message {
   position: absolute;
   bottom: 198px;
   left: 187px;
   opacity: 0;
-  -webkit-transition: opacity 3s linear 2s;
+  @include prefix(transition, opacity 3s linear 2s);
+  &.visible {
+    opacity: 1
+  }
+}
+
+.unknown {
+  margin-top: -40px;
+  opacity: 0;
+  @include prefix(transition, opacity 100ms linear);
   &.visible {
     opacity: 1
   }
