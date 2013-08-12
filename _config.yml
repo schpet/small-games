@@ -1,3 +1,4 @@
 name: 4 Small Games
 markdown: redcarpet
 permalink: pretty
+exclude: [Gemfile]
