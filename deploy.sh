@@ -23,4 +23,4 @@ git add -A
 git commit -m "Published updates"
 # May not want to push straight away
 # git push origin master
-git checkout $SOURCE_BRANCH
+# git checkout $SOURCE_BRANCH
