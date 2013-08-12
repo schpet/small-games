@@ -20,6 +20,9 @@
         {% javascript app %}
         {% stylesheet base %}
 
+        {% if page.custom_script %}{{ page.custom_script | javascript }}{% endif %}
+        {% if page.custom_stylesheet %}{{ page.custom_stylesheet | stylesheet }}{% endif %}
+
     </head>
     <body>
 
