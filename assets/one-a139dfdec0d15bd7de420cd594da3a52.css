@@ -1,0 +1,44 @@
+.skeleton {
+  position: absolute;
+  bottom: 155px;
+  left: 70px;
+  background: url("../images/skeleton-sprite.png");
+  width: 60px;
+  height: 60px; }
+  .skeleton.look-left {
+    -webkit-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1); }
+
+.background {
+  background-image: url("../images/background.jpg");
+  width: 513.5px;
+  height: 180px;
+  position: absolute;
+  bottom: 0; }
+
+.final-message {
+  position: absolute;
+  bottom: 198px;
+  left: 187px;
+  opacity: 0;
+  -webkit-transition: opacity 3s linear 2s;
+  -moz-transition: opacity 3s linear 2s;
+  -ms-transition: opacity 3s linear 2s;
+  -o-transition: opacity 3s linear 2s;
+  transition: opacity 3s linear 2s; }
+  .final-message.visible {
+    opacity: 1; }
+
+.unknown {
+  margin-top: -40px;
+  opacity: 0;
+  -webkit-transition: opacity 100ms linear;
+  -moz-transition: opacity 100ms linear;
+  -ms-transition: opacity 100ms linear;
+  -o-transition: opacity 100ms linear;
+  transition: opacity 100ms linear; }
+  .unknown.visible {
+    opacity: 1; }
