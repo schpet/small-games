@@ -1,9 +1,4 @@
-@mixin prefix($k, $v) {
-  -webkit-#{$k}: $v;
-     -moz-#{$k}: $v;
-      -ms-#{$k}: $v;
-       -o-#{$k}: $v;
-}
+@import 'mixins';
 
 $frame-count: 5;
 $frame-width: 60px;

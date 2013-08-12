@@ -20,11 +20,13 @@
         {% javascript app %}
         {% stylesheet base %}
 
-        {% if page.custom_script %}{{ page.custom_script | javascript }}{% endif %}
-        {% if page.custom_stylesheet %}{{ page.custom_stylesheet | stylesheet }}{% endif %}
+        {% if page.gamename %}
+          {{ page.gamename | javascript }}
+          {{ page.gamename | stylesheet }}
+        {% endif %}
 
     </head>
-    <body>
+    <body{% if page.gamename %} class="background-{{ page.gamename }}"{% endif %}>
 
         <div class="container">
           <div class="site">

@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+{{ content }}
+
+{% if page.next %}
+<div id="next" class="hidden block-next">
+  next: 
+  <span  class="background-{{ page.next }}">
+    <a href="{{ site.baseurl }}{{ page.next }}">
+      {{ page.next }}
+    </a>
+  </span>
+</div>
+{% endif %}

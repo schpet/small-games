@@ -2,7 +2,7 @@
 
 LEFT = 37
 RIGHT = 39
-IMPATIENT = false
+IMPATIENT = true
 
 class AnimatableThing extends EventEmitter
   constructor: (options)->
@@ -267,6 +267,10 @@ class GameOne extends EventEmitter
     @background.addListener('backgroundIsMoving', @skeleton.stopMoving)
 
     @skeleton.addListener('ihavefoundmyplacethankyou', @background.itsOver)
+    @skeleton.addListener('ihavefoundmyplacethankyou', ->
+      document.getElementById('next')?.classList.add 'fade-in'
+
+    )
 
     @setup()
 

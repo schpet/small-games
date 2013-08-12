@@ -1,3 +1,5 @@
+@import "mixins";
+
 $orange: rgb(255, 166, 0);
 body {
   background: #FF0;
@@ -30,21 +32,27 @@ a {
 
 .game-links {
   text-align: center;
-  .game {
-    $p: 35px;
-    background: #fff;
-    width: 100px;
-    height: 100px - $p;
-    padding-top: $p;
-    display: inline-block;
-  }
 }
+.block-game {
+  $p: 35px;
+  background: #fff;
+  width: 100px;
+  height: 100px - $p;
+  padding-top: $p;
+  display: inline-block;
+}
+
 .game-frame {
   background: #fff;
   padding: 20px;
   display: inline-block;
   border-radius: 8px;
+  .game {
+    width: 400px;
+    height: 400px;
+  }
 }
+
 .game-container {
   display: inline-block;
   position: relative;
@@ -53,4 +61,32 @@ a {
   .game-title {
     font-size: 26px;
   }
+}
+
+@mixin background($background, $foreground) {
+  background-color: $background;
+  color: $foreground;
+  a {
+    color: $foreground;
+    &:hover {
+      color: lighten($foreground, 10%);
+    }
+  }
+}
+
+.background-one {
+  @include background(#B3B3B3, #736874);
+}
+.background-two {
+  @include background(#A00, #BB0);
+}
+.block-next {
+  margin-top: 20px;
+}
+.hidden {
+  opacity: 0;
+  @include prefix(transition, opacity 1s linear 7s)
+}
+.fade-in {
+  opacity: 1;
 }

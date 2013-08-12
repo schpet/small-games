@@ -1,0 +1,8 @@
+@mixin prefix($k, $v) {
+  -webkit-#{$k}: $v;
+     -moz-#{$k}: $v;
+      -ms-#{$k}: $v;
+       -o-#{$k}: $v;
+          #{$k}: $v;
+}
+
