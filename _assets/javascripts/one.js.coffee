@@ -2,7 +2,7 @@
 
 LEFT = 37
 RIGHT = 39
-IMPATIENT = true
+IMPATIENT = false
 
 class AnimatableThing extends EventEmitter
   constructor: (options)->
